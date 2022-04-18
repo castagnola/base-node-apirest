@@ -11,6 +11,8 @@ class Server {
         //Paths para rutas raiz
         this.usersRoutes = '/api/users';
         this.authRoutes = '/api/auth';
+        this.categoriesRouter = '/api/categories';
+        this.productsRoutes = '/api/products';
 
         //Conectar a base de datos
         this.connectionDB();
@@ -40,7 +42,9 @@ class Server {
 
     routes() {
         this.app.use(this.authRoutes, require('../routes/auth'));
-        this.app.use(this.usersRoutes, require('../routes/user'));
+        this.app.use(this.usersRoutes, require('../routes/users'));
+        this.app.use(this.categoriesRouter, require('../routes/categories'));
+        this.app.use(this.productsRoutes,require('../routes/products'))
     }
 
     listen() {

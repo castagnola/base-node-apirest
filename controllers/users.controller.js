@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 const User = require('../models/user');
 const user = require('../models/user');
 
+//Traer usuarios
 const usersGet = async(req, res = response) => {
     
     const { start_date, end_date, page, limit = 5 } = req.query; //desustructuracion de argumentos
@@ -14,12 +15,13 @@ const usersGet = async(req, res = response) => {
             .limit(limit)
     ])
 
-    res.json({
+    res.status(200).json({
         total,
-        "data": resp
+        data: resp
     });
 }
 
+//Crear user
 const usersPost = async(req, res = response) => {
 
     const {name,email,password,role} = req.body;
@@ -31,10 +33,13 @@ const usersPost = async(req, res = response) => {
 
     await user.save();
 
-    res.status(201).json({ "data": user });
+    res.status(201).json({
+        data: user
+    });
 
 }
 
+//Actualizar un user
 const usersPut = async(req, res = response) => {
 
     const { id } = req.params;
@@ -47,20 +52,23 @@ const usersPut = async(req, res = response) => {
         body.password = bcryptjs.hashSync(password, salt);
     }
 
-    const user = await User.findByIdAndUpdate( id, body, {new: true} ); //Devuelve l registro actualizado
+    const user = await User.findByIdAndUpdate(id, body, { new: true }); //Devuelve l registro actualizado
+    
     res.status(201).json({
-        "data":user
-    })
+        data: user
+    });
 
 }
 
+//Actualizacion parcial del usuarioo
 const usersPatch = (req, res = response) => {
     res.json({
-        "data":null
+        data:null
     })
 
 }
 
+//Borrado del Usuario
 const usersDelete = async(req, res = response) => {
 
     const { id } = req.params;
@@ -71,9 +79,9 @@ const usersDelete = async(req, res = response) => {
     //Camnbiar estado
     const user = await User.findByIdAndUpdate(id, { status: false }, { new: true });
 
-    res.json({
-        "data": user,
-    })
+    res.status(200).json({
+        data: user
+    });
 
 }
 
