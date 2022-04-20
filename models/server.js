@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../database/config');
+const fileUpload = require('express-fileupload');
 
 class Server {
 
@@ -13,6 +14,7 @@ class Server {
         this.authRoutes = '/api/auth';
         this.categoriesRouter = '/api/categories';
         this.productsRoutes = '/api/products';
+        this.uploadsRoutes = '/api/uploads';
 
         //Conectar a base de datos
         this.connectionDB();
@@ -38,13 +40,20 @@ class Server {
 
         //directorio publico
         this.app.use(express.static('public'))
+
+        //File upload
+        this.app.use(fileUpload({
+            limits: { fileSize: 50 * 1024 * 1024 },
+          }));
     }
 
     routes() {
         this.app.use(this.authRoutes, require('../routes/auth'));
         this.app.use(this.usersRoutes, require('../routes/users'));
+        this.app.use(this.productsRoutes, require('../routes/products'));
+        this.app.use(this.uploadsRoutes, require('../routes/uploads'));
         this.app.use(this.categoriesRouter, require('../routes/categories'));
-        this.app.use(this.productsRoutes,require('../routes/products'))
+
     }
 
     listen() {

@@ -38,14 +38,6 @@ const categorieShow = async(req, res= response) => {
 const categoriePost = async(req, res=response) => {
     const name = req.body.name.toUpperCase();
 
-    // const categoryDB = Category.findOne({ name });
-
-    // if (categoryDB.status) { //validar si existe y esta activa
-    //     res.status(400).json({
-    //         msg: `La categoria ${categoryDB.name} ya existe`
-    //     });
-    // }
-
     //generar la data a guardar
     const data = {
         name,

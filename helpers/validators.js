@@ -67,6 +67,21 @@ const isProduct = async (id = '') => {
     }
 }
 
+/**
+ * 
+ * @param {*} collection 
+ * @param {*} collections 
+ */
+const isCollections =  (collection='',collections=[]) => {
+    
+    const include = collections.include(collection);
+    if (!include) {
+        throw new Error(`La collección ${collection} no es permitida - ${collections}`);
+    }
+
+    return true;
+}
+
 
 module.exports = {
     isRoleValidate,
@@ -74,5 +89,6 @@ module.exports = {
     isUser,
     isCategory,
     isProduct,
+    isCollections,
     existCategoryName
 }
