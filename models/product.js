@@ -33,7 +33,9 @@ const ProductSchema = Schema({
         type: Boolean,
         default: true,
         
-    }
+    },
+    img: { type: String }
+    
 });
 
 //Remueve valores en la respuesta

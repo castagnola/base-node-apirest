@@ -74,7 +74,7 @@ const isProduct = async (id = '') => {
  */
 const isCollections =  (collection='',collections=[]) => {
     
-    const include = collections.include(collection);
+    const include = collections.includes(collection);
     if (!include) {
         throw new Error(`La collección ${collection} no es permitida - ${collections}`);
     }

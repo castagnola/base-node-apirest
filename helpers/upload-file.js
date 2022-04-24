@@ -11,14 +11,15 @@ const uploadFile = (files,extensionsAvailable = ['png', 'jpg', 'gif','pdf'], fol
             return reject(`La extencion no es valida ${ext} - ${extensionsAvailable}`);
         };
     
-        const uploadPath = path.join(__dirname, '../uploads/', folder,file.name);
+        const nameTemp = `${Math.random() + new Date().getTime()}.${ext}`;
+
+        const uploadPath = path.join(__dirname, '../uploads/', folder,nameTemp);
     
         file.mv(uploadPath, (err) => {
             if (err) {
                 reject(err);
             }
-    
-            resolve(uploadPath)
+            resolve(nameTemp)
         });
     });
    
