@@ -1,5 +1,6 @@
 ## RestServer
-Api base para node.js + express
+Api Rest desarrollada en node.js + express
+
 ## Instalación
 
 1. Clone el repositorio:
